@@ -17,4 +17,12 @@ Conway game of life is interesting because we can build incredible structures wi
 
 It would be nice to save the output of the game. I will see if I can manage to do this.
 
+# TODO
 
+- [x] Basic Conway's GoL rules
+- [x] Loading of a file
+- [x] Displaying in real time
+- [ ] Basic Langton's ant rules
+- [ ] CLI config (input file, size...)
+- [ ] Regulated framerate
+- [ ] Saving
