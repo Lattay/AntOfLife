@@ -9,6 +9,7 @@ class AOLWindow: public sf::RenderWindow
     public:
         AOLWindow(int, int, std::string);
         ~AOLWindow();
+        void first_draw(Map&);
         void draw_map(Map&);
 
     private:

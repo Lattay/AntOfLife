@@ -2,9 +2,11 @@
 #include "map.hpp"
 
 Map::Map(std::string filename):
-    m_filename(filename), m_w(0), m_h(0)
+    m_w(0), m_h(0), m_filename(filename)
 {
+    std::cout << "Loading map file..." << std::endl;
     load_map();
+    std::cout << "Done." << std::endl;
 }
 
 Map::~Map(){}
@@ -56,8 +58,18 @@ void Map::load_map(){
     file.open(m_filename);
     int nw = 0;
     char c = 'x';
-    while(c != EOF){
-        c = file.get();
+    
+    file.seekg (0, file.end);
+    int l = file.tellg();
+    file.seekg (0, file.beg);
+
+    char* buffer = new char[l];
+    
+    file.read(buffer, l);
+    file.close();
+
+    for(int i = 0; i < l; i++){
+        c = buffer[i];
         if(c == '\n'){
             if(nw > m_w){
                 m_w = nw;
@@ -70,13 +82,13 @@ void Map::load_map(){
     }
 
     m_cells = std::vector<char>(m_h*m_w);
-    m_switched = std::vector<bool>(m_h*m_w);
+    m_switched = std::vector<bool>(m_h*m_w, false);
     
     c = 'x';
     int x = 0;
     int y = 0;
-    while(c != EOF){
-        c = file.get();
+    for(int i = 0; i < l; i++){
+        c = buffer[i];
         if(c == '\n'){
             y += 1;
             x = 0;
@@ -89,7 +101,7 @@ void Map::load_map(){
             x += 1;
         }
     }
-    file.close();
+    delete[] buffer;
 }
 
 

@@ -15,6 +15,9 @@ int main(int argc, char** argv){
     AOLWindow window(SIZEX, SIZEY, std::string("Ant of Life"));
     std::cout << "Window created." << std::endl;
 
+    window.first_draw(map);
+    
+    window.display();
     while (window.isOpen()){
         sf::Event event;
         while (window.pollEvent(event)){
@@ -23,6 +26,7 @@ int main(int argc, char** argv){
             }
 
         }
+
 
         //window.clear();
         window.draw_map(map);
