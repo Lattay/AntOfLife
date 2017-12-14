@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-Wall
+CFLAGS=-g -Wall
 LFLAGS=`pkg-config --libs sfml-graphics`
 
 all : main.o window.o map.o
