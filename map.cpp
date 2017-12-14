@@ -13,12 +13,25 @@ Map::~Map(){}
 
 
 void Map::update(){
+    int c = 0;
     for(int i = 0, l = m_w*m_h; i < l; i++){
         if(m_cells[i] == ALIVE){
             char next = count_next(i);
             m_switched[i] = next != 2 && next != 3;
         } else {
             m_switched[i] = count_next(i) == 3;
+        }
+        if(m_switched[i]){
+            c++;
+        }
+    }
+    for(int i = 0, l = m_w*m_h; i < l; i++){
+        if(m_switched[i]){
+            if(m_cells[i] == ALIVE){
+                m_cells[i] = DEAD;
+            } else {
+                m_cells[i] = ALIVE;
+            }
         }
     }
 }
@@ -31,15 +44,17 @@ Swvec Map::get_switched(){
     int c = 0;
 
     for(int i = 0, l = m_w*m_h; i < l; i++){
-        if(m_switched[i])
+        if(m_switched[i]){
             c++;
+        }
     }
 
     Swvec v(c);
 
     for(int i = 0, l = m_w*m_h; i < l; i++){
-        if(m_switched[i])
-            v[i] = {get_x(i), get_y(i), m_cells[i]};
+        if(m_switched[i]){
+            v[i] = {.x = get_x(i), .y = get_y(i), .state = m_cells[i]};
+        }
     }
 
     return v;

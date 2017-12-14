@@ -4,13 +4,18 @@
 //#include "ant.hpp"
 #include "window.hpp"
 
-#define SIZEX 800
-#define SIZEY 800
+#define SIZEX 480
+#define SIZEY 280
 
 int main(int argc, char** argv){
     std::cout << "Initialisation of the field..." << std::endl;
+
     Map map("test.txt");
+
+    sf::Time T = sf::milliseconds(1000);
+
     //Ant ant(SIZEX/2, SIZEY/2);
+    
     std::cout << "Creating the window..." << std::endl;
     AOLWindow window(SIZEX, SIZEY, std::string("Ant of Life"));
     std::cout << "Window created." << std::endl;
@@ -18,6 +23,8 @@ int main(int argc, char** argv){
     window.first_draw(map);
     
     window.display();
+
+    sf::Clock timer;
     while (window.isOpen()){
         sf::Event event;
         while (window.pollEvent(event)){
@@ -29,10 +36,13 @@ int main(int argc, char** argv){
 
 
         //window.clear();
-        window.draw_map(map);
-        window.display();
-        map.update();
-        //ant.update(map);
+        if(timer.getElapsedTime() > T){
+            map.update();
+            //ant.update(map);
+            window.draw_map(map);
+            window.display();
+            timer.restart();
+        }
     }
 
     return 0;
