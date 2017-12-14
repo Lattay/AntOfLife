@@ -120,15 +120,19 @@ void Map::load_map(){
 }
 
 
+#define check_and_add(i) if(i >= 0 && i < l){if(m_cells[i]){c++;}}
 int Map::count_next(int i){
-    return m_cells[i + m_w] +
-        m_cells[i + 1] +
-        m_cells[i + m_w + 1] +
-        m_cells[i - m_w] +
-        m_cells[i - 1] +
-        m_cells[i - m_w - 1] +
-        m_cells[i - m_w + 1] +
-        m_cells[i + m_w - 1];
+    int c = 0;
+    int l = m_w*m_h;
+    check_and_add(i + m_w)
+    check_and_add(i + 1)
+    check_and_add(i + m_w + 1)
+    check_and_add(i - m_w)
+    check_and_add(i - 1)
+    check_and_add(i - m_w - 1)
+    check_and_add(i - m_w + 1)
+    check_and_add(i + m_w - 1)
+    return c;
 }
 
 /*
