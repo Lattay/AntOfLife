@@ -3,6 +3,19 @@
 What would happen if a Langton's ant run on a Conway's Game of life field ? The would create a
 Let's give a try !
 
+# Use
+
+To compile the project you have to install SFML devellopments headers and dynamic librairies. You should also have a C++11 compiler (only tested with g++ 7.2.0).
+
+For linux users you can then launch the make command in the project folder.
+
+For others I do not really know how to proceed. I you know how to install SFML then use a C++11 compatible compiler to compile all cpp files from the project and then link them to create the final program.
+
+When the program is compiled you can launch it without arguments to show the option list :
+```
+$ ./AntOfLife
+```
+
 # Features
 
 ## Graphic UI
