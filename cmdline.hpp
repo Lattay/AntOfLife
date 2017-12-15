@@ -15,10 +15,9 @@ class Cmd {
         int get_T();
         bool gol_enabled();
         bool ant_enabled();
-        int get_w();
-        int get_h();
+        int get_csize();
         char p_state;
-        bool get_random();
+        bool use_random();
         int get_rw();
         int get_rh();
         float get_prop();
@@ -28,8 +27,7 @@ class Cmd {
         int m_random;
         bool m_gol;    
         bool m_ant;
-        int m_w;
-        int m_h;
+        int m_csize;
         int m_rw;
         int m_rh;
         float m_prop;

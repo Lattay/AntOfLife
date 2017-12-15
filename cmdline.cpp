@@ -13,13 +13,13 @@ int parseInt(char* s){
 
 
 Cmd::Cmd(int argc, char** argv):
-    p_state(OK), m_filename("input.txt"), m_T(200), m_random(false), m_gol(true), m_ant(true), m_w(800), m_h(800), m_rw(80), m_rh(80)
+    p_state(OK), m_filename("input.txt"), m_T(200), m_random(false), m_gol(true), m_ant(true), m_csize(-1), m_rw(80), m_rh(80)
 {
     if(argc == 1){
         std::cout << "AntOfLife usage :" << std::endl;
 
         std::cout << "AntOfLife [-r W H PROP][-t T]";
-        std::cout << "[-m MODE][-s W H] [FILENAME]";
+        std::cout << "[-m MODE][-s SIZE] [FILENAME]";
         std::cout << std::endl;
 
         std::cout << "Options :" << std::endl;
@@ -38,7 +38,7 @@ Cmd::Cmd(int argc, char** argv):
         std::cout << "conway's game of life only. Default ";
         std::cout << "is both." << std::endl;
 
-        std::cout << "-s W H\t\t\tset window size in pixel.";
+        std::cout << "-s SIZE\t\t\tset cell size in pixel.";
         std::cout << std::endl;
 
         std::cout << "FILENAME\t\tif random mode is not ";
@@ -83,9 +83,8 @@ Cmd::Cmd(int argc, char** argv):
                     break;
                 }
             } else if(s == "-s"){
-                if(i < argc - 2){
-                    m_w = std::stoi(std::string(argv[++i]));
-                    m_h = std::stoi(std::string(argv[++i]));
+                if(++i < argc){
+                    m_csize = std::stoi(std::string(argv[++i]));
                 } else {
                     p_state = FAIL;
                     break;
@@ -107,12 +106,8 @@ int Cmd::get_T(){
     return m_T;
 }
 
-int Cmd::get_h(){
-    return m_h;
-}
-
-int Cmd::get_w(){
-    return m_w;
+int Cmd::get_csize(){
+    return m_csize;
 }
 
 bool Cmd::gol_enabled(){
@@ -123,7 +118,7 @@ bool Cmd::ant_enabled(){
     return m_ant;
 }
 
-bool Cmd::get_random(){
+bool Cmd::use_random(){
     return m_random;
 }
 

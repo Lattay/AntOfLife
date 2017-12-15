@@ -9,8 +9,8 @@
 #define DEAD 0
 
 #define get_index(x, y) (m_w * y + x)
-#define get_x(i) i % m_w
-#define get_y(i) i / m_w
+#define GET_X(i) i % m_w
+#define GET_Y(i) i / m_w
 
 
 struct Switched {
@@ -33,12 +33,12 @@ class Map
         char get_cell(int, int);
         void switch_cell(int, int);
         Swvec get_switched();
+        void clean_switched();
         int get_w();
         int get_h();
 
     protected:
         int count_next(int);
-
 
     private:
         int m_w;
@@ -48,8 +48,6 @@ class Map
         std::string m_filename;
         std::vector<char> m_cells;
         std::vector<bool> m_switched;
-
-
 };
 
 #endif // MAP_HPP

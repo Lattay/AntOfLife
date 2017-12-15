@@ -56,6 +56,7 @@ void Map::switch_cell(int x, int y){
         if(!m_switched[i]){
             m_cells[i] = m_cells[i] == ALIVE ? DEAD : ALIVE;
             m_switched[i] = true;
+            m_nbsw++;
         }
     }
 }
@@ -65,15 +66,19 @@ void Map::switch_cell(int x, int y){
 Swvec Map::get_switched(){
     Swvec v(m_nbsw);
 
-    int j = 0;
-    for(int i = 0, l = m_w*m_h; i < l; i++){
+    for(int i = 0, j = 0, l = m_w*m_h; i < l; i++){
         if(m_switched[i]){
-            v[j++] = {.x = get_x(i), .y = get_y(i), .state = m_cells[i]};
+            v[j++] = {.x = GET_X(i), .y = GET_Y(i), .state = m_cells[i]};
         }
     }
 
-
     return v;
+}
+
+void Map::clean_switched(){
+    for(int i = 0, l = m_w*m_h; i < l; i++){
+        m_switched[i] = false;
+    }
 }
 
 int Map::get_w(){
@@ -167,8 +172,8 @@ bool Map::gen_map(){
 
 int Map::count_next(int i){
     int c = 0;
-    int x = get_x(i);
-    int y = get_y(i);
+    int x = GET_X(i);
+    int y = GET_Y(i);
 
     check_and_add(x, y + 1, i + m_w)
     check_and_add(x + 1, y, i + 1)

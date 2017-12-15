@@ -16,6 +16,8 @@ class Ant {
         Ant(int, int);
         ~Ant();
         void update(Map&);
+        int get_x();
+        int get_y();
 
     private:
         char m_direction;

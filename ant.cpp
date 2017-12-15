@@ -1,5 +1,4 @@
 #include "ant.hpp"
-#include <iostream>
 
 Ant::Ant(int x, int y):
     m_direction(TOP), m_x(x), m_y(y)
@@ -17,7 +16,13 @@ void Ant::update(Map &map){
     map.switch_cell(m_x, m_y);
     m_x += DX(m_direction);
     m_y += DY(m_direction);
-    std::cout << m_x << " " << m_y << std::endl;
 
 }
-    
+
+int Ant::get_x(){
+    return m_x;
+}
+
+int Ant::get_y(){
+    return m_y;
+}
