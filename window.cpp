@@ -59,6 +59,7 @@ void AOLWindow::draw_ant(Map &map, Ant &ant){
         sf::RectangleShape cell(sf::Vector2f(wr, hr));
         cell.setPosition(wr*x, hr*y);
         cell.setFillColor(CLR_ANT);
+        draw(cell);
     }
 }
 
