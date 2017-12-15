@@ -9,6 +9,11 @@ AOLWindow::AOLWindow(int w, int h, std::string name) :
 
 AOLWindow::~AOLWindow(){}
 
+void AOLWindow::resize(int w, int h){
+    m_w = w;
+    m_h = h;
+}
+
 void AOLWindow::first_draw(Map &map){
     int wc = map.get_w(), hc = map.get_h();
     int wr = m_w / wc, hr = m_h / hc;

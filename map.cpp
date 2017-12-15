@@ -1,12 +1,20 @@
 #include <iostream>
 #include "map.hpp"
 
+/*
+#define echo std::cout <<
+#define esp << " " <<
+#define nl << std::endl
+*/
+
 Map::Map(std::string filename):
-    m_w(0), m_h(0), m_nbsw(0), m_filename(filename)
+    m_w(0), m_h(0), m_prop(-1), m_nbsw(0), m_filename(filename)
 {
-    std::cout << "Loading map file..." << std::endl;
-    load_map();
-    std::cout << "Done." << std::endl;
+}
+
+Map::Map(int w, int h, float prop):
+    m_w(w), m_h(h), m_prop(prop), m_nbsw(0), m_filename("")
+{
 }
 
 Map::~Map(){}
@@ -37,8 +45,22 @@ void Map::update(){
 }
 
 char Map::get_cell(int x, int y){
-    return m_cells[get_index(x, y)];
+    if(x >= 0 && x < m_w && y >= 0 && y < m_h)
+        return m_cells[get_index(x, y)];
+    return DEAD;
 }
+
+void Map::switch_cell(int x, int y){
+    if(x >= 0 && x < m_w && y >= 0 && y < m_h){
+        int i = get_index(x, y);
+        if(!m_switched[i]){
+            m_cells[i] = m_cells[i] == ALIVE ? DEAD : ALIVE;
+            m_switched[i] = true;
+        }
+    }
+}
+
+
 
 Swvec Map::get_switched(){
     Swvec v(m_nbsw);
@@ -62,9 +84,15 @@ int Map::get_h(){
     return m_h;
 }
 
-void Map::load_map(){
+bool Map::load_map(){
+    if(m_prop != -1){
+        return false;
+    }
     std::ifstream file;
     file.open(m_filename);
+    if(!file.is_open()){
+        return false;
+    }
     int nw = 0;
     char c = 'x';
     
@@ -111,21 +139,45 @@ void Map::load_map(){
         }
     }
     delete[] buffer;
+    return true;
 }
 
+bool Map::gen_map(){
+    if(m_prop < 0){
+        return false;
+    }
+    
+    std::random_device generator;
+    std::bernoulli_distribution dist(m_prop);
+    
+    m_cells = std::vector<char>(m_h*m_w);
+    m_switched = std::vector<bool>(m_h*m_w, false);
+    for(int i = 0, l = m_h*m_w; i < l; i++){
+        float r = dist(generator);
+        if(r){
+            m_cells[i] = ALIVE;
+        } else {
+            m_cells[i] = DEAD;
+        }
+    }   
+    return true;
+}
 
-#define check_and_add(i) if(i >= 0 && i < l){if(m_cells[i]){c++;}}
+#define check_and_add(x, y, i) if(x >= 0 && x < m_w && y >= 0 && y < m_h){if(m_cells[i] == ALIVE){c++;}}
+
 int Map::count_next(int i){
     int c = 0;
-    int l = m_w*m_h;
-    check_and_add(i + m_w)
-    check_and_add(i + 1)
-    check_and_add(i + m_w + 1)
-    check_and_add(i - m_w)
-    check_and_add(i - 1)
-    check_and_add(i - m_w - 1)
-    check_and_add(i - m_w + 1)
-    check_and_add(i + m_w - 1)
+    int x = get_x(i);
+    int y = get_y(i);
+
+    check_and_add(x, y + 1, i + m_w)
+    check_and_add(x + 1, y, i + 1)
+    check_and_add(x + 1, y + 1, i + m_w + 1)
+    check_and_add(x, y - 1, i - m_w)
+    check_and_add(x - 1, y, i - 1)
+    check_and_add(x - 1, y - 1, i - m_w - 1)
+    check_and_add(x + 1, y - 1, i - m_w + 1)
+    check_and_add(x - 1, y + 1, i + m_w - 1)
     return c;
 }
 
