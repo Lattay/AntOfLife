@@ -35,8 +35,8 @@ Cmd::Cmd(int argc, char** argv):
 
         std::cout << "-m MODE\t\t\tselect game mode : 'ant' ";
         std::cout << "for Langton's ant only, 'gol' for ";
-        std::cout << "conway's game of life only. Default ";
-        std::cout << "is both." << std::endl;
+        std::cout << "Conway's game of life only. Default ";
+        std::cout << "is both at the same time." << std::endl;
 
         std::cout << "-s SIZE\t\t\tset cell size in pixel.";
         std::cout << std::endl;
