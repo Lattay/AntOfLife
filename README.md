@@ -3,6 +3,23 @@
 What would happen if a Langton's ant run on a Conway's Game of life field ?
 Let's give a try !
 
+# Features
+
+This programm is able to run three types of simulations :
+- the original Conway's game of life
+- the original Langton's ant
+- a hybrid simulation where cells obey to Conway's rules but there is a Langton's ant running on top of it.
+
+These simulations are displayed in a window created with the SFML librairy.
+The window automatically take a size that should fit a resolution around 1300x800.
+
+Command line argument allow the user to :
+- selecting one of the tree simulation
+- specify a file to build the map
+- specify the size (in pixel) of cells
+- use a random generated map, specifing the proportion of living cells and the size of the map
+- specify the minimum time between two refreshing (in millisecond)
+
 # Use
 
 To compile the project you have to install SFML devellopments headers and dynamic librairies. You should also have a C++11 compiler (only tested with g++ 7.2.0).
@@ -15,20 +32,6 @@ When the program is compiled you can launch it without arguments to show the opt
 ```
 $ ./AntOfLife
 ```
-
-# Features
-
-## Graphic UI
-
-The program would be used with a CLI but we want to watch the thing running so I should create a graphic UI based on SFML.
-
-## Loading fields
-
-Conway game of life is interesting because we can build incredible structures within it. Those structures must come from somewere and since I don't want to build an interactive UI the program have to load field files.
-
-## Saving output
-
-It would be nice to save the output of the game. I will see if I can manage to do this.
 
 # TODO
 
