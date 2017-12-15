@@ -10,6 +10,13 @@
 #define get_index(x, y) (m_w * y + x)
 #define get_x(i) i % m_w
 #define get_y(i) i / m_w
+
+/*
+#define echo std::cout <<
+#define esp << " " <<
+#define nl << std::endl
+*/
+
 struct Switched {
     int x;
     int y;
@@ -38,6 +45,7 @@ class Map
     private:
         int m_w;
         int m_h;
+        int m_nbsw;
         std::string m_filename;
         std::vector<char> m_cells;
         std::vector<bool> m_switched;

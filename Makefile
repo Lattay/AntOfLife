@@ -2,7 +2,9 @@ CC=g++
 CFLAGS=-g -Wall
 LFLAGS=`pkg-config --libs sfml-graphics`
 
-all : main.o window.o map.o
+all : final clean
+	
+final : main.o window.o map.o
 	g++ window.o map.o main.o -o AntOfLife $(LFLAGS)
 
 main.o :

@@ -12,8 +12,8 @@ AOLWindow::~AOLWindow(){}
 void AOLWindow::first_draw(Map &map){
     int wc = map.get_w(), hc = map.get_h();
     int wr = m_w / wc, hr = m_h / hc;
-    sf::RectangleShape cell(sf::Vector2f(wr, hr));
 
+    sf::RectangleShape cell(sf::Vector2f(wr, hr));
     for(int x = 0; x < wc; x++){
         for(int y = 0; y < hc; y++){
             cell.setPosition(wr*x, hr*y);
