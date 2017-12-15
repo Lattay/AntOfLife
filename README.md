@@ -22,7 +22,7 @@ It would be nice to save the output of the game. I will see if I can manage to d
 - [x] Basic Conway's GoL rules
 - [x] Loading of a file
 - [x] Displaying in real time
-- [ ] Basic Langton's ant rules
+- [x] Basic Langton's ant rules
 - [x] CLI config (input file, size...)
 - [x] Regulated framerate
 - [ ] Saving
