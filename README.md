@@ -1,6 +1,6 @@
 # Ant of Life
 
-What would happen if a Langton's ant run on a Conway's Game of life field ? The would create a
+What would happen if a Langton's ant run on a Conway's Game of life field ?
 Let's give a try !
 
 # Use
