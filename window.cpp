@@ -49,6 +49,7 @@ void AOLWindow::draw_map(Map &map){
     }
 }
 
+#if !EDITOR_MODE
 void AOLWindow::draw_ant(Map &map, Ant &ant){
     int wc = map.get_w(), hc = map.get_h();
     float wr = float(m_w) / float(wc), hr = float(m_h) / float(hc);
@@ -61,5 +62,14 @@ void AOLWindow::draw_ant(Map &map, Ant &ant){
         cell.setFillColor(CLR_ANT);
         draw(cell);
     }
+}
+#endif // EDITOR_MODE
+
+int AOLWindow::get_wc(Map &map){
+    return int(float(m_w) / float(map.get_w()));
+}
+
+int AOLWindow::get_hc(Map &map){
+    return int(float(m_h) / float(map.get_h()));
 }
 

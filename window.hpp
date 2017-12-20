@@ -18,6 +18,8 @@ class AOLWindow: public sf::RenderWindow
         void first_draw(Map&);
         void draw_map(Map&);
         void draw_ant(Map&, Ant&);
+        int get_wc(Map&);
+        int get_hc(Map&);
 
     private:
         int m_w;
