@@ -60,27 +60,24 @@ int main(int argc, char** argv){
     
     window.display();
 
-    bool has_event = false;
+    bool has_update;
     while (window.isOpen()){
-        has_event = false;
+        has_update = false;
         sf::Event event;
         while (window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window.close();
-            } else if(event.type == sf::Event::Resized){
-                window.apply_resize(event.size.width, event.size.height);
-                window.clear();
-                window.first_draw(*map);
             } else if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left){
+                std::cout << event.mouseButton.x << " " << event.mouseButton.y << std::endl;
                 int x = event.mouseButton.x / window.get_wc(*map);
-                int y = 1 + event.mouseButton.y / window.get_hc(*map);
+                int y = event.mouseButton.y / window.get_hc(*map);
                 map->switch_cell(x, y);
+                has_update = true;
             }
-            has_event = true;
         }
 
 
-        if(has_event){
+        if(has_update){
             window.draw_map(*map);
             map->clean_switched(); // important dans le mode ant
 

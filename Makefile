@@ -17,6 +17,9 @@ _editor : editor.o cmd_editor.o window_ed.o map.o
 simulator.o :
 	g++ -c simulator.cpp -o simulator.o $(CFLAGS)
 
+editor.o :
+	g++ -c editor.cpp -o editor.o $(CFLAGS)
+
 window.o :
 	g++ -c window.cpp -o window.o $(CFLAGS)
 

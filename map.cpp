@@ -118,6 +118,8 @@ bool Map::load_map(){
             }
             nw = 0;
             m_h += 1;
+        } else if(c == '\r'){
+            // ignore
         } else {
             nw += 1;
         }
@@ -134,6 +136,8 @@ bool Map::load_map(){
         if(c == '\n'){
             y += 1;
             x = 0;
+        } else if(c == '\r'){
+            // ignore
         } else {
             if(c == '*'){
                 m_cells[get_index(x, y)] = ALIVE;
@@ -185,16 +189,3 @@ int Map::count_next(int i){
     check_and_add(x - 1, y + 1, i + m_w - 1)
     return c;
 }
-
-/*
-int Map::count_next(int x, int y){
-    return m_cells[get_index(x, y + 1)] + 
-        m_cells[get_index(x, y + 1)] +
-        m_cells[get_index(x - 1, y + 1)] +
-        m_cells[get_index(x - 1, y)] +
-        m_cells[get_index(x - 1, y - 1)] +
-        m_cells[get_index(x - 1, y - 1)] +
-        m_cells[get_index(x, y - 1)] +
-        m_cells[get_index(x + 1, y - 1)];
-}
-*/

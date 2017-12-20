@@ -75,13 +75,6 @@ int main(int argc, char** argv){
         while (window.pollEvent(event)){
             if(event.type == sf::Event::Closed){
                 window.close();
-            } else if(event.type == sf::Event::Resized){
-                window.apply_resize(event.size.width, event.size.height);
-                window.clear();
-                window.first_draw(*map);
-                if(mode_ant){
-                    window.draw_ant(*map, ant);
-                }
             }
 
         }

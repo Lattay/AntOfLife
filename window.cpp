@@ -1,8 +1,8 @@
 #include "window.hpp"
 #include <iostream>
 
-AOLWindow::AOLWindow(int w, int h, std::string name) : 
-    sf::RenderWindow(sf::VideoMode(w, h), name), m_w(w), m_h(h)
+AOLWindow::AOLWindow(int w, int h, std::string name): 
+    sf::RenderWindow(sf::VideoMode(w, h, sf::Style::Titlebar | sf::Style::Close), name), m_w(w), m_h(h)
 {
 
 }
